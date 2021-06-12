@@ -1,0 +1,100 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Report</title>
+</head>
+<body>
+    <form action="/" method="POST">
+    <label for="city">City Name : </label>
+    <input name="city" type="text">
+    <button type="submit">GO</button>
+    </form>
+</body>
+</html> -->
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Forecast App</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="icon" type="image/png" href="icon.png"/>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+  
+  <div class="card">
+    <div class="search">
+        <form action="/" method="POST" id="city-form">
+        <input type="text" class="search-bar" name="city" placeholder="Search" autocomplete="off">
+        <input type="text" name="lattitude" id="lat" style="display: none;">
+      <input type="text" name="longitude" id="long" style="display: none;">
+      <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+    </div>
+    <div class="weather loading">
+      <h2 class="city">Weather in <%= name %></h2>
+      <h1 class="temp"><%= temperature %>&#8451</h1>
+      <p style="font-size:1rem">Feels like <%= feelsLike %> &#8451</p>
+      <div class="flex">
+        <img src="https://openweathermap.org/img/wn/04n.png" alt="" class="icon" />
+        <div class="description"><%= description %></div>
+      </div>
+      <div class="humidity">Humidity: <%= humidi %>%</div>
+      <div class="wind">Wind speed: <%= winSpeed %> m/sec</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>Made with 💗 by Rao Mayank </div>
+  </div>
+  </div>
+
+  <script>
+var finding_pos=`<%= pos %>`
+function geoFindMe() {
+      function success(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        document.getElementById('lat').value = latitude;
+        document.getElementById('long').value = longitude;
+        document.getElementById('city-form').submit();
+
+        console.log(latitude, " and  ", longitude);
+      }
+
+      function error() {
+        alert("Unable to Fetch your location, Please enter your city name");
+        console.log(error);
+      }
+
+      if (!navigator.geolocation) {
+        alert('Geolocation is not supported by your browser, Please enter your city name');
+      } else {
+        navigator.geolocation.getCurrentPosition(success, error);
+      }
+
+    }
+    if(finding_pos==='true'){
+    geoFindMe();
+    console.log("hello");
+    }
+
+  </script>
+</body>
+
+</html>
